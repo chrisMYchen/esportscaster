@@ -3,3 +3,5 @@
 .python-version
 processed
 .DS_Store
+node_modules/
+screenshots/
