@@ -2,4 +2,4 @@
 .ipynb_checkpoints
 .python-version
 processed
-
+.DS_Store
