@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../common/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="../common/common.css">
+    <style>
+        body, html {
+            margin: 0px;
+            padding: 0px;
+            color: #59595c;
+        }
+
+        @-webkit-keyframes show-alert-background {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        @-webkit-keyframes hide-alert-background {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @-webkit-keyframes show-alert-window {
+            from {
+                opacity: 0.4;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @-webkit-keyframes hide-alert-window {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
+
+        .card {
+            border-radius: 5px;
+            border: solid 1px rgb(200, 200, 200);
+            background-color: rgb(250, 250, 250);
+            box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+        }
+
+        .alert-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            background: radial-gradient(rgba(150,150,150,0.7), rgba(80,80,80,0.7), rgba(50,50,50,0.7));
+            animation-name: show-alert-background;
+            animation-duration: 300ms;
+        }
+
+        .alert-background > div {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+            width: 400px;
+            height: 365px;
+            background-color: rgb(235,235,235);
+            position: absolute;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgb(50, 50, 50);
+            animation-name: show-alert-window;
+            animation-duration: 300ms;
+        }
+
+        .close-alert-background {
+            animation-name: hide-alert-background;
+            animation-duration: 300ms;
+            animation-fill-mode: forwards;
+        }
+
+        .close-alert-background > div {
+            animation-name: hide-alert-window;
+            animation-duration: 300ms;
+        }
+
+        .close-alert {
+            position: absolute;
+            right: -8px;
+            top: -8px;
+            cursor: pointer;
+            background-color: rgb(235, 235, 235);
+            border-radius: 20px;
+            border: solid 1px rgb(80,80,80);
+            box-shadow: 0px 0px 5px 0px rgb(50, 50, 50);
+        }
+
+        .button {
+            position: absolute;
+            border-radius: 2px;
+            border: solid 1px rgb(200, 200, 200);
+            background-color: rgb(245, 245, 245);
+            box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+            cursor: pointer;
+            font-size: 12px;
+            text-decoration: none;
+            text-align: center;
+            background-size: 7px;
+            color: #59595c;
+            padding: 5px;
+        }
+
+        .button:hover {
+            background-color: rgb(250, 250, 250);
+        }
+
+        .button[disabled-button] {
+            opacity: 0.5 !important;
+            cursor: default !important;
+            color: #59595c !important;
+        }
+
+        .button-arrow {
+            background-image: url(../images/forward.png);
+            background-repeat: no-repeat;
+            background-position: 90%;
+        }
+
+        .button-arrow div {
+            width: 90%;
+        }
+
+        .bug-image {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            height: 16px;
+        }
+
+        .title {
+            position: absolute;
+            top: 10px;
+            left: 35px;
+            font-size: 14px;
+        }
+
+        .sub-title {
+            position: absolute;
+            left: 10px;
+            top: 35px;
+            font-size: 13px;
+        }
+
+        .toggle {
+            position: absolute;
+            width: 30px;
+            height: 16px;
+            border: solid 1px rgb(190, 190, 190);
+            border-radius: 8px;
+            cursor: pointer;
+            transition-duration: 300ms;
+            background-image: url(../images/tiny-v.png);
+            background-position: 3px 3px;
+            background-color: rgb(230, 230, 230);
+            background-repeat: no-repeat;
+        }
+
+        .toggle div {
+            position: absolute;
+            left: -2px;
+            height: 16px;
+            width: 16px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+            transition-duration: 300ms;
+        }
+
+        .toggle-true {
+            background-color: #8ce196 !important;
+            transition-duration: 300ms;
+        }
+
+        .toggle-true div {
+            left: 15px !important;
+            transition-duration: 300ms;
+        }
+
+        .include-screenshot {
+            position: absolute;
+            left: 10px;
+            top: 90px;
+            font-size: 13px;
+        }
+
+        .screenshot-toggle {
+            position: absolute;
+            right: 10px;
+            top: 90px;
+        }
+
+        .drop-down {
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            top: 60px;
+            font-size: 13px;
+            height: 20px;
+            overflow: hidden;
+            line-height: 20px;
+            border: solid 1px rgb(200,200,200);
+            border-radius: 4px;
+            background-color: rgb(240,240,240);
+            cursor: pointer;
+            transition-duration: 300ms;
+            z-index: 100;
+        }
+
+        .drop-down:hover {
+            background-color: rgb(245,245,245);
+        }
+
+        .drop-down::before {
+            content: 'Choose the type of issue';
+            position: absolute;
+            left: 5px;
+            top: 0px;
+            font-size: 13px;
+        }
+
+        .drop-down::after {
+            content: '▾';
+            position: absolute;
+            right: 5px;
+            top: 0px;
+            font-size: 16px;
+        }
+
+        .drop-down-option {
+            padding-left: 5px;
+        }
+
+        .drop-down-option:hover {
+            background-color: rgb(150,150,150);
+            color: rgb(230,230,230);
+        }
+
+        .email {
+            position: absolute;
+            top: 90px;
+            left: 10px;
+            width: 350px;
+            background-color: rgb(240,240,240);
+            font-size: 13px;
+            color: #59595c;
+        }
+
+        .details {
+            position: absolute;
+            top: 120px;
+            left: 10px;
+            width: 350px;
+            background-color: rgb(240,240,240);
+            font-size: 13px;
+            color: #59595c;
+            height: 70px;
+            resize: none;
+        }
+
+    </style>
+
+</head>
+<body>
+<div id="alert" class="alert-background close-alert-button">
+    <div id="alert-box">
+        <div id="report-form">
+            <img class="close-alert close-alert-button" src="../images/close.png" height="16" />
+            <div class="card" style="position: absolute; width: 380px; height: 245px; left: 10px; top: 10px;">
+                <img src="../images/bug.png" class="bug-image" />
+                <div style="position: absolute;" class="title"><b>Report an issue</b></div>
+                <div class="sub-title">
+                    Tell us what's wrong and we’ll fix it.
+                </div>
+
+                <!--div class="include-screenshot"><b>Include a screenshot of the page in the report</b></div>
+                <div class="toggle screenshot-toggle"><div></div></div-->
+
+                <div class="drop-down">
+                    <br />
+                    <div class="drop-down-option">Something is broken on this page</div>
+                    <div class="drop-down-option">There are ads on this page</div>
+                    <div class="drop-down-option">This page opens pop-ups</div>
+                    <div class="drop-down-option">This page is a pop-up</div>
+                    <div class="drop-down-option">Other</div>
+                </div>
+
+                <input type="text" class="textbox email" placeholder="email - if you want us to let you know when we solve it" />
+                <textarea class="textbox details" placeholder="short description of the issue"></textarea>
+
+                <a id="send-button" class="button button-arrow" disabled-button style="top: 210px; right: 10px; width: 50px; color: #007DBD;"><div>SEND</div></a>
+                <a class="button close-alert-button" style="top: 210px; right: 75px; width: 50px;"><div>CANCEL</div></a>
+            </div>
+            <div class="card" style="position: absolute; width: 380px; height: 90px; left: 10px; top: 265px;">
+                <div style="font-size: 13px; margin: 10px; text-align: center;">If there's an ad or another element that you'd like to block:</div>
+                <a id="block-button" class="button" style="top: 35px; left: 0px; right: 0px; margin: 0 auto; width: 210px; color: #007DBD;"><div>BLOCK AN ELEMENT ON THIS PAGE</div></a>
+                <div style="font-size: 11px; position: absolute; bottom: 5px; text-align: center; width: 100%;">* Quick access: right click > STANDS > Block elements on this page</div>
+            </div>
+        </div>
+        <div id="report-thanks" style="display: none; text-align: center; margin-top: 140px;">
+            <img src="../images/programmer.png" />
+            <div style="text-align: center;">
+                <b>
+                    Thank you so much!
+                    <br />
+                    We're on it.
+                </b>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="report.js"></script>
+</body>
+</html>

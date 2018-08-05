@@ -1,0 +1,51 @@
+{
+   "background": {
+      "persistent": true,
+      "scripts": [ "common/common.js", "common/common-background.js", "background/chrome.js", "background/utils.js", "background/stndz.js", "background/lists.js", "background/mystats.js", "background/user.js", "background/block-element.js", "background/notifications.js", "background/core.js", "background/start.js" ]
+   },
+   "browser_action": {
+      "default_icon": {
+         "19": "icons/19.png",
+         "38": "icons/38.png"
+      },
+      "default_popup": "views/browser_action_window/window.html",
+      "default_title": "Fair AdBlocker"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "common/common.js", "common/common-content.js", "content/chrome.js", "content/popup-blocking.js", "content/doc-start.js", "content/messaging.js" ],
+      "match_about_blank": false,
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": false,
+      "js": [ "content/sites/fb.js" ],
+      "matches": [ "https://*.facebook.com/*" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": true,
+      "js": [ "content/sites/yt.js" ],
+      "matches": [ "https://*.youtube.com/*" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": true,
+      "js": [ "content/doc-end.js" ],
+      "match_about_blank": false,
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_end"
+   } ],
+   "default_locale": "en",
+   "description": "__MSG_appDesc__",
+   "homepage_url": "https://www.standsapp.org",
+   "icons": {
+      "128": "icons/128.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlB8Pj+GOnpKxOAc2l9oQRbOSualZoR9vzE9UJdZP1K+oiHSka9oBKhE5xSXyZpDVzya/P/CCLnPJaZbIaks/7m2GfcmyneNgiGylYDOmuBlm8vUNDdeh8SN/t3IeEGvBa6c17JidtHJWJK8FvY/YVqWyewPgcfRsCg1yemcaA/PsvS8OVHtdt+4mXPM9c/RCm1UOANzNnkyUtU9AMY9EF2910B18jqxmhxp5qoPHtnL9ujK0mKdxLVKGV8xNLCxH0zc6gWcu9x+Sin8w7/7669Rs6yttGk28Mqg4uv5//lGUTrc/vEfKIWwr11pDF7Idw3Ev7Q3drw/LcupkcbY3lwIDAQAB",
+   "manifest_version": 2,
+   "name": "__MSG_appName__",
+   "optional_permissions": [ "management" ],
+   "permissions": [ "webNavigation", "tabs", "webRequest", "webRequestBlocking", "http://*/*", "https://*/*", "notifications", "storage", "cookies", "browsingData", "contextMenus", "unlimitedStorage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.500",
+   "web_accessible_resources": [ "views/web_accessible/*" ]
+}

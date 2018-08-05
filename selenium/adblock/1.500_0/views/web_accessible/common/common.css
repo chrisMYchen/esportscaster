@@ -1,0 +1,33 @@
+@import url("font.css");
+
+p, div, span, a, font, input, textarea {
+    font-family: 'Roboto', 'Arimo' !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+}
+
+b, b p, b div, b span, b a, b font, strong, strong, strong p, strong div, strong span, strong a, strong font {
+    font-family: 'Roboto', 'Arimo' !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+}
+
+.textbox {
+    border: 1px solid #c4c4c4;
+    font-size: 16px;
+    padding: 4px 4px 4px 4px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    box-shadow: 0px 0px 8px #d9d9d9;
+    -moz-box-shadow: 0px 0px 8px #d9d9d9;
+    -webkit-box-shadow: 0px 0px 8px #d9d9d9;
+}
+
+.textbox:focus {
+    outline: none;
+    border: 1px solid #7bc1f7;
+    box-shadow: 0px 0px 8px #7bc1f7;
+    -moz-box-shadow: 0px 0px 8px #7bc1f7;
+    -webkit-box-shadow: 0px 0px 8px #7bc1f7;
+}
